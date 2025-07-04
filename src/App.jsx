@@ -16,11 +16,11 @@ function App() {
   return (
 
     <div className='bg-gray-300 min-h-screen'>
-      <Navbar />
       {selectedItem ? (
         <Details item={selectedItem} goBack={handleGoBack} />
       ) : (
         <>
+        <Navbar />
           <div className="bg-white m-12 mb-0 flex justify-end ">
             <label for="category" className=" text-black font-semibold "></label>
             <select name="category" id="category" className='mr-12 mt-4 border-4' >

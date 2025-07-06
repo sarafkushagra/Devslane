@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import Items from './components/Items';
 import Details from './components/Details';
 import ItemsList from './components/ItemsList';
 
 function App() {
-  const data = [
+  const [query, setQuery] = useState("");
+  const [sort, setSort] = useState("default");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const handleShowDetails = (item) => {
+    setSelectedItem(item);
+  };
+
+  const handleGoBack = () => {
+    setSelectedItem(null);
+  };
+  const alldata = [
     {
       image: "https://images.unsplash.com/photo-1570784332176-fdd73da66f03?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Y3VwfGVufDB8fDB8fHww",
       name: "Stylish Cups",
@@ -94,23 +103,61 @@ function App() {
     }
 
   ]
-  const [selectedItem, setSelectedItem] = useState(null);
-  const handleShowDetails = (item) => {
-    setSelectedItem(item);
-  };
+  let [data, setData] = useState(alldata);
+  function handleChange(event) {
+    const newQuery = event.target.value;
+    data = alldata.filter(function (item) {
+      const lowerCaseName = item.name.toLowerCase();
+      const lowerCaseQuery = newQuery.toLowerCase();
+      return lowerCaseName.indexOf(lowerCaseQuery) !== -1;
+    });
+    setQuery(newQuery);
+    setData(data);
+  }
+  if (sort === "name") {
+    data = data.sort(function (a, b) {
+      return a.name.localeCompare(b.name);
+    });
+  } 
+  else if (sort === "pricelh") {
+    data = data.sort(function (a, b) {
+      return a.price - b.price;
+    });
+  }
+  else if (sort === "pricehl") {
+    data = data.sort(function (a, b) {
+      return b.price - a.price;
+    });
+  }
+  function handleSort(event) {
+    setSort(event.target.value) ;
+  }
 
-  const handleGoBack = () => {
-    setSelectedItem(null);
-  };
   return (
 
-    <div className='bg-gray-300 min-h-screen'>
+    <div className='bg-gray-100 '>
       {selectedItem ? (
         <Details item={selectedItem} goBack={handleGoBack} />
       ) : (
         <>
           <Navbar />
-          <ItemsList items={data} showDetails={handleShowDetails} />
+          <div className="bg-white m-12 mb-0 flex justify-end ">
+            <input type="text" placeholder='Search' value={query} onChange={handleChange} className='border-4 border-gray-300 rounded p-2 mr-4 mt-4 ' />
+            <label for="sorting" className=" text-black font-semibold "></label>
+            <select onChange={handleSort} value={sort} name="sorting" id="sorting" className='mr-12 mt-4 border-4 border-gray-300' >
+              <option value="default">Default</option>
+              <option value="name">Sort By Name</option>
+              <option value="pricelh">Sort By Price Low to High</option>
+              <option value="pricehl">Sort By Price High to Low</option>
+            </select>
+          </div>
+          <ItemsList items={data} />
+          <div className="bg-white flex m-12 pb-20  p-4 mt-0  gap-2">
+
+            <button className="border-red-500 border-4 bg-red-300 text-white px-6 py-2 rounded">1</button>
+            <button className="border-red-500 border-4 bg-red-300 text-white px-6 py-2 rounded">2</button>
+            <button className="border-red-500 border-4 bg-red-300 text-white px-6 py-2 rounded">3</button>
+          </div>
           <Footer />
         </>
       )}

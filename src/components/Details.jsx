@@ -4,7 +4,6 @@ export default function Details({ item, goBack }) {
     return (
         <div className="fixed inset-0 bg-gray-100  flex items-center justify-center z-50">
             <div className="flex bg-white rounded-lg shadow-lg w-4/5 h-3/4">
-                {/* Left: Image */}
                 <div className="flex items-center justify-center w-1/2 h-full p-8">
                     <img
                         src={item.image}
@@ -12,7 +11,6 @@ export default function Details({ item, goBack }) {
                         className="object-contain rounded-lg w-full h-full max-h-[400px] max-w-[400px] bg-gray-50"
                     />
                 </div>
-                {/* Right: Details */}
                 <div className="w-1/2 h-full p-8 flex flex-col">
                     <div>
                         <h1 className="text-5xl mb-6">{item.name}</h1>

@@ -53,7 +53,7 @@ function CartRow({ cartData, updateCart,localCart,setLocalCart }) {
                             <img src={item.thumbnail} alt={item.title} className="w-24 mr-16" />
                             <span className="text-red-500 font-semibold text-lg">{item.title}</span>
                         </div>
-                        <div className="flex flex-[1] items-center justify-center font-bold text-gray-700">${item.price}</div>
+                        <div className="flex flex-[1] items-center justify-center font-bold text-gray-700">${item.price.toFixed(2)}</div>
                         <div className="flex flex-[1] items-center justify-center">
                             <input
                                 productid={item.id}
@@ -61,7 +61,7 @@ function CartRow({ cartData, updateCart,localCart,setLocalCart }) {
                                 type="number"
                                 value={localCart[item.id]}
                                 onChange={handleChange} /></div>
-                        <div className="flex flex-[1] items-center justify-center font-bold text-gray-700">${localCart[item.id] * item.price}</div>
+                        <div className="flex flex-[1] items-center justify-center font-bold text-gray-700">${(localCart[item.id] * item.price).toFixed(2)}</div>
                     </div>
                 );
             })}

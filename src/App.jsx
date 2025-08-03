@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import ItemListPage from './components/ItemsListPage';
@@ -46,6 +47,7 @@ function App() {
       <Footer />
     </div>
   );
+
 }
 
 export default App

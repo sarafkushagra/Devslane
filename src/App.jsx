@@ -1,11 +1,15 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import Footer from './Components/Footer';
 import ItemListPage from './components/ItemsListPage';
 import Details from './components/Details';
 import CartPage from './components/CartPage';
 import NotFound from './components/NotFound';
 import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import LoginPage from './Components/Authorization_Pages/LoginPage';
+import SignUp from './Components/Authorization_Pages/SignUp';
+import ForgetPassword from './Components/Authorization_Pages/ForgetPassword';
+
 
 function App() {
 
@@ -41,6 +45,9 @@ function App() {
           <Route path='/details/:id' element={<Details onAddToCart={handleAddToCart} />} />
           <Route path='/cart' element={<CartPage cartData={savedData} updateCart={updateCart} />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/forget-password" element={<ForgetPassword />} />
         </Routes>
       </div>
       <Footer />

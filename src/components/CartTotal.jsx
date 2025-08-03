@@ -30,9 +30,8 @@ export default function CartTotal({ cartData }) {
   }
 
   return (
-    <div className='flex  justify-end bg-white  rounded-lg shadow-md'>
+    <div className='flex  justify-end pr-40  rounded-lg shadow-md'>
 
-    
     <div className="my-8 w-full sm:w-[60%] lg:w-[30%] border-2 border-gray-400">
       <div className="border-b-2 border-gray-400 p-3">
         <h3 className="font-medium text-gray-700 text-lg">Cart Totals</h3>

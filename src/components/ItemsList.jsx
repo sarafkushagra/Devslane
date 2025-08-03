@@ -1,22 +1,17 @@
-import Items from './Items'
-export default function ItemsList({ items }) {
-  return (
-    <>
-      <div className="bg-white m-12 mt-0 mb-0  p-4 flex flex-wrap justify-center gap-z">
-        {items && items.map(function (item) {
-          return (
-            <Items
-              key={item.name}
-              id={item.id}
-              name={item.name}
-              category={item.category}
-              price={item.price}
-              image={item.image}
-              showDetails={item.showDetails}
-            />
-          );
-        })}
-      </div>
-    </>
-  );
+import React,{memo} from 'react';
+import Items from './Items';
+function ItemsList({ products }) {
+    return (
+        <div className='flex flex-wrap justify-center sm:grid grid-cols-3 place-items-center gap-2 space-y-2 md:space-y-0' >
+            {products && products.map(function (item) {
+                return (
+                    <Items
+                        key={item.id}
+                        {...item}
+                    />
+                );
+            })}
+        </div>
+    );
 }
+export default memo(ItemsList);

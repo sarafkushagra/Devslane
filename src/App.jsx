@@ -6,9 +6,9 @@ import Details from './components/Details';
 import CartPage from './components/CartPage';
 import NotFound from './components/NotFound';
 import Navbar from './components/Navbar';
-import LoginPage from './Components/Authorization_Pages/LoginPage';
-import SignUp from './Components/Authorization_Pages/SignUp';
-import ForgetPassword from './Components/Authorization_Pages/ForgetPassword';
+import LoginPage from './components/Authorization_Pages/LoginPage';
+import SignUp from './components/Authorization_Pages/SignUp';
+import ForgetPassword from './components/Authorization_Pages/ForgetPassword';
 
 
 function App() {

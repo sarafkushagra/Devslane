@@ -9,6 +9,8 @@ import Navbar from './components/Navbar';
 import LoginPage from './components/Authorization_Pages/LoginPage';
 import SignUp from './components/Authorization_Pages/SignUp';
 import ForgetPassword from './components/Authorization_Pages/ForgetPassword';
+import AuthRoute from './components/Authorization_Pages/AuthRoute';
+import UserRoute from './components/Authorization_Pages/UserRoute';
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
   const savedData = JSON.parse(savedCartString);
 
   const [cart, setCart] = useState(savedData);
+  const [user, setUser] = useState();
 
   const handleAddToCart = useCallback(function (productId, count) {
     const oldCount = cart[productId] || 0;
@@ -38,16 +41,18 @@ function App() {
 
   return (
     <div className='bg-stone-100 flex flex-col h-screen overflow-auto' >
-      <Navbar totalCount={totalCount} />
+      <Navbar user= {user} setUser={setUser} totalCount={totalCount} />
       <div className='grow' >
         <Routes>
-          <Route index element={<ItemListPage />} />
-          <Route path='/details/:id' element={<Details onAddToCart={handleAddToCart} />} />
-          <Route path='/cart' element={<CartPage cartData={savedData} updateCart={updateCart} />} />
-          <Route path="*" element={<NotFound />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/forget-password" element={<ForgetPassword />} />
+
+          <Route index element={<UserRoute user={user}><ItemListPage /></UserRoute>} />
+          <Route path='/details/:id' element={<UserRoute user={user}><Details onAddToCart={handleAddToCart} /></UserRoute>} />
+          <Route path='/cart' element={<UserRoute user={user}><CartPage cartData={savedData} updateCart={updateCart} /></UserRoute>} />
+          <Route path="*" element={<AuthRoute user={user}><NotFound /></AuthRoute>} />
+          <Route path="/login" element={<AuthRoute user={user}><LoginPage setUser={setUser} /></AuthRoute>} />
+          <Route path="/signup" element={<AuthRoute user={user}><SignUp /></AuthRoute>} />
+          <Route path="/forget-password" element={<AuthRoute user={user}><ForgetPassword /></AuthRoute>} />
+
         </Routes>
       </div>
       <Footer />

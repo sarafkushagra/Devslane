@@ -3,6 +3,7 @@ import ItemsList from './ItemsList';
 import NoMatching from './NoMatchingItems';
 import { getProductList } from './api';
 import Loading from './Loading';
+import { Navigate } from 'react-router-dom';
 
 function ItemListPage() {
     const [query, setQuery] = useState('');
@@ -52,6 +53,7 @@ function ItemListPage() {
     if (loading) {
         return (<Loading />);
     }
+
 
     return (
         <>

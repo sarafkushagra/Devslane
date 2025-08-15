@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react';
+import { createContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Footer from './components/Footer';
 import ItemListPage from './components/ItemsListPage';
@@ -12,6 +13,7 @@ import ForgetPassword from './components/Authorization_Pages/ForgetPassword';
 import AuthRoute from './components/Authorization_Pages/AuthRoute';
 import UserRoute from './components/Authorization_Pages/UserRoute';
 
+export const UserContext = createContext();
 
 function App() {
 
@@ -41,21 +43,24 @@ function App() {
 
   return (
     <div className='bg-stone-100 flex flex-col h-screen overflow-auto' >
-      <Navbar user= {user} setUser={setUser} totalCount={totalCount} />
-      <div className='grow' >
-        <Routes>
+      <UserContext.Provider value={{ user, setUser }}>
+        <Navbar totalCount={totalCount} />
+        <div className='grow' >
+          <Routes>
 
-          <Route index element={<UserRoute user={user}><ItemListPage /></UserRoute>} />
-          <Route path='/details/:id' element={<UserRoute user={user}><Details onAddToCart={handleAddToCart} /></UserRoute>} />
-          <Route path='/cart' element={<UserRoute user={user}><CartPage cartData={savedData} updateCart={updateCart} /></UserRoute>} />
-          <Route path="*" element={<AuthRoute user={user}><NotFound /></AuthRoute>} />
-          <Route path="/login" element={<AuthRoute user={user}><LoginPage setUser={setUser} /></AuthRoute>} />
-          <Route path="/signup" element={<AuthRoute user={user}><SignUp /></AuthRoute>} />
-          <Route path="/forget-password" element={<AuthRoute user={user}><ForgetPassword /></AuthRoute>} />
+            <Route index element={<UserRoute ><ItemListPage /></UserRoute>} />
+            <Route path='/details/:id' element={<UserRoute ><Details onAddToCart={handleAddToCart} /></UserRoute>} />
+            <Route path='/cart' element={<UserRoute ><CartPage cartData={savedData} updateCart={updateCart} /></UserRoute>} />
+            <Route path="*" element={<AuthRoute ><NotFound /></AuthRoute>} />
+            <Route path="/login" element={<AuthRoute ><LoginPage  /></AuthRoute>} />
+            <Route path="/signup" element={<AuthRoute ><SignUp  /></AuthRoute>} />
+            <Route path="/forget-password" element={<AuthRoute ><ForgetPassword /></AuthRoute>} />
 
-        </Routes>
-      </div>
-      <Footer />
+          </Routes>
+        </div>
+        <Footer />
+      </UserContext.Provider>
+
     </div>
   );
 }

@@ -4,8 +4,12 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import Input from "./Input";
 import axios from "axios";
+import { UserContext } from "../../App";
+import { useContext } from "react";
 
-const LoginPage = ({setUser}) => {
+const LoginPage = () => {
+  const { setUser } = useContext(UserContext);
+
   function callApi(values) {
     axios.post("https://myeasykart.codeyogi.io/login", {
       email: values.email,

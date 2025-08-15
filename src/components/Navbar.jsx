@@ -1,10 +1,11 @@
 import React from 'react'
 import { IoMdCart } from "react-icons/io";
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../App'; // Adjust the import path as necessary
 
-
-export default function Navbar({ user, setUser, totalCount }) {
-
+export default function Navbar({ totalCount }) {
+  const { user, setUser } = useContext(UserContext);
   function handleLogout() {
     localStorage.removeItem("token");
     setUser(undefined);
